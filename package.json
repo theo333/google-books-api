@@ -1,0 +1,15 @@
+{
+	"name": "8th-light-google-books-api",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node src/index.js"
+	},
+	"keywords": [],
+	"author": "Theo Manton",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.17.1"
+	}
+}
