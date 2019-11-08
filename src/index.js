@@ -75,15 +75,20 @@ const questions = [
 
 const bookCli = async () => {
   clearConsole();
-
+  console.log('Welcome to BookFinder!');
   // try {
   //   // prompt:  Search | List
-  //     // answer: search
-  //       // prompt (when): input search query
-  //         // answer: call getBooks(searchQuery)
-  //           // prompt (when): display results
+  //   // answer: search
+  //   // prompt (when): input search query
+  //   // answer: call getBooks(searchQuery)
+  //   // prompt (when): display results
+  //   const answers1 = await inquirer.prompt(questions);
+  //   console.log(answers1);
 
-  // } catch(error) {
+  //   if (answers1.searchQuery) {
+  //     console.log('searchQuery: ', answers1.searchQuery);
+  //   }
+  // } catch (error) {
   //   throw new Error(error);
   // }
 
