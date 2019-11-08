@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
-const { bookCli } = require('../src/index');
+const { getBooks, bookCli } = require('../src/index');
 
-bookCli();
+getBooks('JavaScript');
+// bookCli();
