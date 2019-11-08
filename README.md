@@ -9,7 +9,7 @@
 Install
 >npm i
 
-Create ability to run program by typing "bookfind" in command line from any directory.
+Create ability to run program (Shell Command) by typing "bookfind" in command line from any directory.
 >npm link
 
 
