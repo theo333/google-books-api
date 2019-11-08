@@ -1,14 +1,14 @@
 const inquirer = require('inquirer');
 const axios = require('axios');
-const readline = require('readline')
+const readline = require('readline');
 
 // TODO move all helper functions to utils.js
 const clearConsole = () => {
-  const blankScreen = '\n'.repeat(process.stdout.rows)
-  console.log(blankScreen)
-  readline.cursorTo(process.stdout, 0, 0)
-  readline.clearScreenDown(process.stdout)
-}
+  const blankScreen = '\n'.repeat(process.stdout.rows);
+  console.log(blankScreen);
+  readline.cursorTo(process.stdout, 0, 0);
+  readline.clearScreenDown(process.stdout);
+};
 
 const getBooks = async searchQuery => {
   try {
@@ -31,7 +31,7 @@ const getBooks = async searchQuery => {
   }
 };
 
-const formatBookResults = (results) => {
+const formatBookResults = results => {
   const formatted = results.map(x => {
     const { title, authors, publisher } = x.volumeInfo;
     return {
@@ -62,8 +62,7 @@ const questions = [
   {
     type: 'checkbox',
     name: 'results',
-    message:
-      'Here are the results of your query. Select all you want to add to your Reading List',
+    message: 'Here are the results of your query. Select all you want to add to your Reading List',
     async choices(answers) {
       const results = await getBooks(answers.searchQuery);
       return formatBookResults(results);
@@ -75,7 +74,6 @@ const questions = [
 ];
 
 const bookCli = async () => {
-
   clearConsole();
 
   // try {
