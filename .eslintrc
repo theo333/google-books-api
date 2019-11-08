@@ -1,0 +1,73 @@
+{
+  "parser": "",
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": ["eslint-config-airbnb-base", "plugin:prettier/recommended"],
+  "plugins": ["jest", "prettier"],
+  "rules": {
+    "import/prefer-default-export": 0,
+    "prettier/prettier": "error",
+    "no-bitwise": [
+      "error",
+      {
+        "allow": ["~"]
+      }
+    ],
+    "no-tabs": 1,
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "new-cap": [
+      2,
+      {
+        "newIsCap": true,
+        "capIsNew": false
+      }
+    ],
+    "space-before-function-paren": [0, "always"],
+    "arrow-body-style": [0, "always"],
+    "consistent-return": 0,
+    "function-paren-newline": 0,
+    "global-require": 1,
+    "newline-per-chained-call": 1,
+    "no-nested-ternary": 1,
+    "no-param-reassign": 1,
+    "no-plusplus": 0,
+    "no-loop-func": 0,
+    "no-await-in-loop": 0,
+    "no-continue": 1,
+    "no-case-declarations": 0,
+    "no-shadow": 0,
+    "class-methods-use-this": 0,
+    "quotes": [1, "single"],
+    "max-len": [
+      "warn",
+      {
+        "code": 100,
+        "ignoreComments": true
+      }
+    ],
+    "no-underscore-dangle": 0,
+    "no-unused-vars": 1,
+    "no-unneeded-ternary": 0,
+    "no-restricted-syntax": 1,
+    "radix": 0,
+    "prefer-destructuring": 0,
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "import/no-extraneous-dependencies": 1,
+    "no-useless-escape": 0,
+    "spaced-comment": 0,
+    "import/newline-after-import": 0,
+    "prefer-rest-params": 1,
+    "padding-line-between-statements": 1,
+    "lines-between-class-members": 1
+  }
+}
