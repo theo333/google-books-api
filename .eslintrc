@@ -36,6 +36,7 @@
     "function-paren-newline": 0,
     "global-require": 1,
     "newline-per-chained-call": 1,
+    "no-console": 0,
     "no-nested-ternary": 1,
     "no-param-reassign": 1,
     "no-plusplus": 0,
