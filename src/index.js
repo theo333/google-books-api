@@ -1,9 +1,20 @@
 const inquirer = require('inquirer');
 const axios = require('axios');
+const readline = require('readline')
+
+// TODO move all helper functions to utils.js
+const clearConsole = () => {
+  const blankScreen = '\n'.repeat(process.stdout.rows)
+  console.log(blankScreen)
+  readline.cursorTo(process.stdout, 0, 0)
+  readline.clearScreenDown(process.stdout)
+}
 
 const getBooks = async searchQuery => {
   try {
     const fields = 'items(id,volumeInfo(title,authors,publisher))';
+    // TODO working without key, so need it?
+    // TODO in production app would move to .env file and grab using process.env
     const key = 'AIzaSyCT1qXZGb5kCBEuUJxWhS8YzL9CgwVS6Kg';
 
     const res = await axios.get('https://www.googleapis.com/books/v1/volumes', {
@@ -14,13 +25,23 @@ const getBooks = async searchQuery => {
         fields,
       },
     });
-    const results = res.data.items;
-    const titleResults = results.map(x => x.volumeInfo.title);
-    console.log('titleResults: ', titleResults);
-    return titleResults;
+    return res.data.items;
   } catch (error) {
     console.error(error);
   }
+};
+
+const formatBookResults = (results) => {
+  const formatted = results.map(x => {
+    const { title, authors, publisher } = x.volumeInfo;
+    return {
+      name: `${title} by ${authors.join(', ')}, published by ${publisher}`,
+      value: title,
+      short: title,
+    };
+  });
+  // console.log('formatted: ', formatted);
+  return formatted;
 };
 
 const questions = [
@@ -42,9 +63,10 @@ const questions = [
     type: 'checkbox',
     name: 'results',
     message:
-      'Here are the results of your query. /n Select all you want to add to your Reading List',
+      'Here are the results of your query. Select all you want to add to your Reading List',
     async choices(answers) {
-      return getBooks(answers.searchQuery);
+      const results = await getBooks(answers.searchQuery);
+      return formatBookResults(results);
     },
     when(answers) {
       return answers.searchQuery;
@@ -53,6 +75,9 @@ const questions = [
 ];
 
 const bookCli = async () => {
+
+  clearConsole();
+
   // try {
   //   // prompt:  Search | List
   //     // answer: search
