@@ -1,18 +1,5 @@
 const { existsSync, readFileSync, writeFileSync } = require('fs');
 
-// grab reading list from json file
-// display books
-// selecting book will show author, publisher (use expand type)
-
-// think I need to do something like JSON.parse()
-// fs.readFileSync(path.resolve(__dirname, 'json_filename.json'), function(err, data) {
-// parse data into an object
-// return the array of objects
-// });
-
-// removeBookToList
-// list.filter()
-
 const fileUrl = `${process.cwd()}/src/list.json`;
 
 const getReadingListJson = file => {

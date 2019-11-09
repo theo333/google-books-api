@@ -37,7 +37,7 @@ const bookCli = async () => {
         if (firstAnswer.searchQuery) {
           const bookResults = await getBooks(firstAnswer.searchQuery);
 
-          // add to list prompt
+          // addToList prompt / answer
           const addToListAnswer = await inquirer.prompt({
             type: 'checkbox',
             name: 'addToList',
@@ -48,8 +48,10 @@ const bookCli = async () => {
             },
           });
 
-          if (addToListAnswer.addToList) {
+          if (addToListAnswer.addToList.length) {
             addToReadingList(bookResults, addToListAnswer.addToList);
+          } else {
+            console.log('No books added to your list.\n');
           }
         } else {
           console.log('No search query entered.  Please try again.');
@@ -57,12 +59,13 @@ const bookCli = async () => {
       }
 
       if (firstAnswer.action === 'list') {
+        console.log('\n');
         getReadingList();
         console.log('\n');
       }
 
       if (firstAnswer.action === 'exit') {
-        console.log('Have a great day!\n');
+        console.log('Thanks for using BookFinder!\nHave a great day!\n');
         exitApp = true;
       }
     }
