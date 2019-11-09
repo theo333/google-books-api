@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "bin": {
-    "bookfind": "./bin/bookfind.js"
+    "bookfinder": "./bin/bookfinder.js"
   },
   "scripts": {
     "lint": "make lint",
