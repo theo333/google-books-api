@@ -81,7 +81,7 @@ const bookCli = async () => {
     }
 
     if (firstAnswer.action === 'exit') {
-      console.log('exit')
+      console.log('exit');
     }
   } catch (error) {
     throw new Error(error);
