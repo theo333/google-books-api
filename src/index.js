@@ -23,27 +23,6 @@ const firstQuestion = [
       return answers.action === 'search';
     },
   },
-  // {
-  //   type: 'expand',
-  //   name: 'readingList',
-  //   message: 'Reading List',
-  //   choices: ['test1', 'test2'],
-  //   when(answers) {
-  //     return answers.action === 'list';
-  //   },
-  // },
-  // {
-  //   type: 'checkbox',
-  //   name: 'results',
-  //   message: 'Here are the results of your query. Select all you want to add to your Reading List',
-  //   async choices(answers) {
-  //     const results = await getBooks(answers.searchQuery);
-  //     return formatBookResults(results);
-  //   },
-  //   when(answers) {
-  //     return answers.searchQuery;
-  //   },
-  // },
 ];
 
 const bookCli = async () => {
@@ -53,33 +32,33 @@ const bookCli = async () => {
     let exitApp = false;
     while (!exitApp) {
       const firstAnswer = await inquirer.prompt(firstQuestion);
-      // console.log('firstAnswer: ', firstAnswer);
 
-      if (firstAnswer.searchQuery) {
-        // console.log('searchQuery: ', firstAnswer.searchQuery);
-        const bookResults = await getBooks(firstAnswer.searchQuery);
-        // console.log('bookResults: ', bookResults);
-        // console.log('bookResults: ', JSON.stringify(bookResults));
+      if (firstAnswer.action === 'search') {
+        if (firstAnswer.searchQuery) {
+          const bookResults = await getBooks(firstAnswer.searchQuery);
 
-        // add to list prompt
-        const addToListAnswer = await inquirer.prompt({
-          type: 'checkbox',
-          name: 'addToList',
-          message:
-            'Here are the results of your query. Select all you want to add to your Reading List',
-          async choices() {
-            return formatBookResults(bookResults);
-          },
-        });
+          // add to list prompt
+          const addToListAnswer = await inquirer.prompt({
+            type: 'checkbox',
+            name: 'addToList',
+            message:
+              'Here are the results of your query. Select all you want to add to your Reading List',
+            async choices() {
+              return formatBookResults(bookResults);
+            },
+          });
 
-        if (addToListAnswer.addToList) {
-          addToReadingList(bookResults, addToListAnswer.addToList);
+          if (addToListAnswer.addToList) {
+            addToReadingList(bookResults, addToListAnswer.addToList);
+          }
+        } else {
+          console.log('No search query entered.  Please try again.');
         }
       }
 
       if (firstAnswer.action === 'list') {
-        // console.log('getReadingList: ', getReadingList());
         getReadingList();
+        console.log('\n');
       }
 
       if (firstAnswer.action === 'exit') {
