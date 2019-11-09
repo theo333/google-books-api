@@ -109,14 +109,14 @@ const bookCli = async () => {
       const addToListAnswer = await inquirer.prompt({
         type: 'checkbox',
         name: 'addToList',
-        message: 'Here are the results of your query. Select all you want to add to your Reading List',
+        message:
+          'Here are the results of your query. Select all you want to add to your Reading List',
         async choices() {
           return formatBookResults(bookResults);
         },
       });
 
       if (addToListAnswer.addToList) {
-
         const addToReadingList = (bookResults, itemsToAddTitle) => {
           console.log('itemsToAddTitle: ', itemsToAddTitle);
 
@@ -137,12 +137,11 @@ const bookCli = async () => {
           // oldList.concat(newBooksToAdd_array)
           // TODO check to make sure item is not already in oldList before add so that do not get duplicates
           const newList = oldList.concat(itemsToAdd);
-          console.log('newList: ', newList)
+          console.log('newList: ', newList);
 
           // save json file
           const data = JSON.stringify(newList);
           writeFileSync(fileUrl, data);
-
         };
 
         addToReadingList(bookResults, addToListAnswer.addToList);
