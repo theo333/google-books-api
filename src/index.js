@@ -16,7 +16,7 @@ const getBooks = async searchQuery => {
     const fields = 'items(id,volumeInfo(title,authors,publisher))';
     // TODO working without key, so need it?
     // TODO in production app would move to .env file and grab using process.env
-    const key = 'AIzaSyCT1qXZGb5kCBEuUJxWhS8YzL9CgwVS6Kg';
+    // const key = '';
 
     const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
       params: {
