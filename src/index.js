@@ -2,23 +2,36 @@ const inquirer = require('inquirer');
 
 const clearConsole = require('./utils');
 const { getBooks, formatBookResults } = require('./books');
-const { addToReadingList } = require('./reading-list');
+const { addToReadingList, getReadingList } = require('./reading-list');
 
 const firstQuestion = [
   {
     type: 'list',
     name: 'action',
     message: 'What do you want to do?',
-    choices: ['Search for book', 'View Reading List'],
+    choices: [
+      { name: 'Search for book', value: 'search' },
+      { name: 'View Reading List', value: 'list' },
+      { name: 'Exit', value: 'exit' },
+    ],
   },
   {
     type: 'input',
     name: 'searchQuery',
     message: 'Enter what you want to search for:',
     when(answers) {
-      return answers.action === 'Search for book';
+      return answers.action === 'search';
     },
   },
+  // {
+  //   type: 'expand',
+  //   name: 'readingList',
+  //   message: 'Reading List',
+  //   choices: ['test1', 'test2'],
+  //   when(answers) {
+  //     return answers.action === 'list';
+  //   },
+  // },
   // {
   //   type: 'checkbox',
   //   name: 'results',
@@ -60,6 +73,15 @@ const bookCli = async () => {
       if (addToListAnswer.addToList) {
         addToReadingList(bookResults, addToListAnswer.addToList);
       }
+    }
+
+    if (firstAnswer.action === 'list') {
+      // console.log('getReadingList: ', getReadingList());
+      getReadingList();
+    }
+
+    if (firstAnswer.action === 'exit') {
+      console.log('exit')
     }
   } catch (error) {
     throw new Error(error);

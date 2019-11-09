@@ -31,7 +31,6 @@ const formatBookResults = results => {
       short: title,
     };
   });
-  // console.log('formatted: ', formatted);
   return formatted;
 };
 

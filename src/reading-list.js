@@ -10,39 +10,46 @@ const { existsSync, readFileSync, writeFileSync } = require('fs');
 // return the array of objects
 // });
 
-// addBookToList
-// list.push()
-
 // removeBookToList
 // list.filter()
 
-const addToReadingList = (bookResults, itemsToAddTitle) => {
-  console.log('itemsToAddTitle: ', itemsToAddTitle);
+const fileUrl = `${process.cwd()}/src/list.json`;
 
-  // grab json file
-  const fileUrl = `${process.cwd()}/src/list.json`;
-  let oldList = [];
-  if (existsSync(fileUrl)) {
-    const rawData = readFileSync(fileUrl);
-    console.log('rawData: ', rawData.length);
-    oldList = rawData.length ? JSON.parse(rawData) : [];
+const getReadingListJson = file => {
+  if (existsSync(file)) {
+    const rawData = readFileSync(file);
+    return rawData.length ? JSON.parse(rawData) : [];
   }
-  console.log('oldList: ', oldList);
+};
+
+const addToReadingList = (bookResults, itemsToAddTitle) => {
+  // grab json file
+  const oldList = getReadingListJson(fileUrl);
 
   // filter bookResults to only include addToList items
   const itemsToAdd = bookResults.filter(x => itemsToAddTitle.includes(x.title));
-  // console.log('itemsToAdd: ', itemsToAdd);
 
-  // oldList.concat(newBooksToAdd_array)
-  // TODO check to make sure item is not already in oldList before add so that do not get duplicates
-  const newList = oldList.concat(itemsToAdd);
-  console.log('newList: ', newList);
+  const notInList = (oldList, obj) => {
+    return !oldList.find(x => x.title === obj.title);
+  };
 
-  // save json file
-  const data = JSON.stringify(newList);
+  const itemsToAddNotInList = itemsToAdd.filter(x => notInList(oldList, x));
+  const newList = oldList.concat(itemsToAddNotInList);
+
+  // save to json file
+  const data = JSON.stringify(newList, null, 2);
   writeFileSync(fileUrl, data);
+};
+
+const getReadingList = () => {
+  // grab json
+  const readingListJson = getReadingListJson(fileUrl);
+  readingListJson.forEach(x => {
+    console.log(x.title);
+  });
 };
 
 module.exports = {
   addToReadingList,
+  getReadingList,
 };
