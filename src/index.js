@@ -4,7 +4,7 @@ const clearConsole = require('./utils');
 const { getBooks, formatBookResults } = require('./books');
 const { addToReadingList, getReadingList } = require('./reading-list');
 
-const firstQuestion = [
+const mainQuestion = [
   {
     type: 'list',
     name: 'action',
@@ -31,13 +31,14 @@ const bookCli = async () => {
   try {
     let exitApp = false;
     while (!exitApp) {
-      const firstAnswer = await inquirer.prompt(firstQuestion);
+      const mainAnswer = await inquirer.prompt(mainQuestion);
 
-      if (firstAnswer.action === 'search') {
-        if (firstAnswer.searchQuery) {
-          const bookResults = await getBooks(firstAnswer.searchQuery);
+      if (mainAnswer.action === 'search') {
+        if (mainAnswer.searchQuery) {
+          const bookResults = await getBooks(mainAnswer.searchQuery);
 
           // addToList prompt / answer
+          // TODO: format output (books added to list) into a vertical list
           const addToListAnswer = await inquirer.prompt({
             type: 'checkbox',
             name: 'addToList',
@@ -58,13 +59,13 @@ const bookCli = async () => {
         }
       }
 
-      if (firstAnswer.action === 'list') {
+      if (mainAnswer.action === 'list') {
         console.log('\n');
         getReadingList();
         console.log('\n');
       }
 
-      if (firstAnswer.action === 'exit') {
+      if (mainAnswer.action === 'exit') {
         console.log('Thanks for using BookFinder!\nHave a great day!\n');
         exitApp = true;
       }

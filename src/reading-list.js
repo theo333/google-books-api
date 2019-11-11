@@ -41,13 +41,14 @@ const addToReadingList = (bookResults, itemsToAddTitle) => {
 const getReadingList = () => {
   // grab json
   const readingListJson = getReadingListJson(fileUrl);
-  if (readingListJson) {
+  if (readingListJson.length) {
     readingListJson.forEach(x => {
       const { title, authors, publisher } = x;
-      console.log(`- ${title} by ${authors.join(', ')}, published by ${publisher}`);
+      // TODO use different colors for title, authors, publisher
+      console.log(`${title} \n  by ${authors.join(', ')}, published by ${publisher}`);
     });
   } else {
-    console.log('There are no books in your reading list.\n');
+    console.log('There are no books in your reading list.');
   }
 };
 
