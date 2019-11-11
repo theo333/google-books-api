@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "make lint",
-    "start": "node ./src/index.js"
+    "start": "bookfinder"
   },
   "keywords": [],
   "author": "Theo Manton",

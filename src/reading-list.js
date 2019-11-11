@@ -1,12 +1,13 @@
 const { existsSync, readFileSync, writeFileSync } = require('fs');
 
-const fileUrl = `${process.cwd()}/src/list.json`;
+const fileUrl = `${process.cwd()}/data/list.json`;
 
 const getReadingListJson = file => {
   if (existsSync(file)) {
     const rawData = readFileSync(file);
     return rawData.length ? JSON.parse(rawData) : [];
   }
+  return [];
 };
 
 const addToReadingList = (bookResults, itemsToAddTitle) => {
@@ -20,8 +21,17 @@ const addToReadingList = (bookResults, itemsToAddTitle) => {
     return !oldList.find(x => x.title === obj.title);
   };
 
-  const itemsToAddNotInList = itemsToAdd.filter(x => notInList(oldList, x));
+  let itemsToAddNotInList = [];
+  if (oldList.length) {
+    itemsToAddNotInList = itemsToAdd.filter(x => notInList(oldList, x));
+    if (!itemsToAddNotInList.length) console.log('\nNo books added to your list.\n');
+  } else {
+    itemsToAddNotInList = itemsToAdd;
+  }
+
   const newList = oldList.concat(itemsToAddNotInList);
+
+  // TODO display updated reading list
 
   // save to json file
   const data = JSON.stringify(newList, null, 2);
@@ -31,9 +41,14 @@ const addToReadingList = (bookResults, itemsToAddTitle) => {
 const getReadingList = () => {
   // grab json
   const readingListJson = getReadingListJson(fileUrl);
-  readingListJson.forEach(x => {
-    console.log(x.title);
-  });
+  if (readingListJson) {
+    readingListJson.forEach(x => {
+      const { title, authors, publisher } = x;
+      console.log(`- ${title} by ${authors.join(', ')}, published by ${publisher}`);
+    });
+  } else {
+    console.log('There are no books in your reading list.\n');
+  }
 };
 
 module.exports = {

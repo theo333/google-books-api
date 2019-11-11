@@ -51,7 +51,7 @@ const bookCli = async () => {
           if (addToListAnswer.addToList.length) {
             addToReadingList(bookResults, addToListAnswer.addToList);
           } else {
-            console.log('No books added to your list.\n');
+            console.log('\nNo books added to your list.\n');
           }
         } else {
           console.log('No search query entered.  Please try again.');
