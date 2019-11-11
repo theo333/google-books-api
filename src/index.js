@@ -27,7 +27,7 @@ const mainQuestion = [
 
 const bookCli = async () => {
   clearConsole();
-  console.log('Welcome to BookFinder!');
+  console.log('Welcome to BookFinderCLI!\n');
   try {
     let exitApp = false;
     while (!exitApp) {
@@ -66,7 +66,7 @@ const bookCli = async () => {
       }
 
       if (mainAnswer.action === 'exit') {
-        console.log('Thanks for using BookFinder!\nHave a great day!\n');
+        console.log('\nThanks for using BookFinderCLI!\nHave a great day!\n');
         exitApp = true;
       }
     }
