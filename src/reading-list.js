@@ -1,4 +1,5 @@
 const { existsSync, readFileSync, writeFileSync } = require('fs');
+const { formatBookOutput } = require('./utils');
 
 const fileUrl = `${process.cwd()}/data/list.json`;
 
@@ -42,10 +43,8 @@ const getReadingList = () => {
   // grab json
   const readingListJson = getReadingListJson(fileUrl);
   if (readingListJson.length) {
-    readingListJson.forEach(x => {
-      const { title, authors, publisher } = x;
-      // TODO use different colors for title, authors, publisher
-      console.log(`${title} \n  by ${authors.join(', ')}, published by ${publisher}`);
+    readingListJson.forEach(book => {
+      console.log(formatBookOutput(book));
     });
   } else {
     console.log('There are no books in your reading list.');

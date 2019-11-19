@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { removeBoundaryQuotes } = require('./utils');
+const { removeBoundaryQuotes, formatBookOutput } = require('./utils');
 
 const getBooks = async searchQuery => {
   try {
@@ -30,11 +30,9 @@ const getBooks = async searchQuery => {
 
 const formatBookResults = results => {
   console.log('results: ', results);
-  const formatted = results.map(x => {
-    const { title, authors, publisher } = x;
-    let name = title;
-    name += authors ? ` by ${authors.join(', ')}` : '';
-    name += publisher ? `, published by ${publisher}` : '';
+  const formatted = results.map(book => {
+    const { title } = book;
+    const name = formatBookOutput(book);
     return {
       name,
       value: title,

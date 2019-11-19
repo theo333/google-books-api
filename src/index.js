@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 
-const clearConsole = require('./utils');
+const { clearConsole } = require('./utils');
 const { getBooks, formatBookResults } = require('./books');
 const { addToReadingList, getReadingList } = require('./reading-list');
 

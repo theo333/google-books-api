@@ -9,7 +9,16 @@ const clearConsole = () => {
 
 const removeBoundaryQuotes = str => str.replace(/^"|"$/g, '');
 
+const formatBookOutput = book => {
+  const { title, authors, publisher } = book;
+  let output = title;
+  output += authors ? ` by ${authors.join(', ')}` : '';
+  output += publisher ? `, published by ${publisher}` : '';
+  return output;
+};
+
 module.exports = {
   clearConsole,
   removeBoundaryQuotes,
+  formatBookOutput,
 };
