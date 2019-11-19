@@ -7,4 +7,9 @@ const clearConsole = () => {
   readline.clearScreenDown(process.stdout);
 };
 
-module.exports = clearConsole;
+const removeBoundaryQuotes = str => str.replace(/^"|"$/g, '');
+
+module.exports = {
+  clearConsole,
+  removeBoundaryQuotes,
+};

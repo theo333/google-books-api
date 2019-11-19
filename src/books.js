@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { removeBoundaryQuotes } = require('./utils');
 
 const getBooks = async searchQuery => {
   try {
@@ -15,7 +16,12 @@ const getBooks = async searchQuery => {
         fields,
       },
     });
-    const books = response.data.items.map(x => x.volumeInfo);
+    const books = response.data.items.map(x => {
+      if (x.volumeInfo.publisher) {
+        x.volumeInfo.publisher = removeBoundaryQuotes(x.volumeInfo.publisher);
+      }
+      return x.volumeInfo;
+    });
     return books;
   } catch (error) {
     console.error(error);
@@ -23,10 +29,14 @@ const getBooks = async searchQuery => {
 };
 
 const formatBookResults = results => {
+  console.log('results: ', results);
   const formatted = results.map(x => {
     const { title, authors, publisher } = x;
+    let name = title;
+    name += authors ? ` by ${authors.join(', ')}` : '';
+    name += publisher ? `, published by ${publisher}` : '';
     return {
-      name: `${title} by ${authors.join(', ')}, published by ${publisher}`,
+      name,
       value: title,
       short: title,
     };
