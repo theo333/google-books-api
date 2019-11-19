@@ -8,7 +8,8 @@
   },
   "scripts": {
     "lint": "make lint",
-    "start": "bookfinder"
+    "start": "bookfinder",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Theo Manton",
@@ -26,6 +27,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "husky": "^2.2.0",
+    "jest": "^24.9.0",
     "prettier": "^1.17.0"
   }
 }
