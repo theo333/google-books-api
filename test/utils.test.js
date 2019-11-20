@@ -1,5 +1,6 @@
 /*eslint-disable quotes*/
 const { removeBoundaryQuotes, formatBookOutput } = require('../src/utils');
+const { titleColor, authorsColor, publisherColor } = require('../src/colors');
 
 describe('removeBoundaryQuotes removes quotes from beginning and end of string', () => {
   const strings = [
@@ -56,10 +57,14 @@ describe('formatBookOutput correctly formats output for reading list and book ch
   describe('correctly formats output for reading list', () => {
     const middot = String.fromCharCode(186);
     const desiredOutput = [
-      `${middot} Underwater Dogs\n   by Seth Casteel\n   published by Little, Brown\n`,
-      `${middot} Dogs\n   by Catherine Johns\n`,
-      `${middot} Dogs\n   published by Barron's Educational Series\n`,
-      `${middot} Underwater Dogs   \n`,
+      `${middot} ${titleColor('Underwater Dogs')}\n   by ${authorsColor(
+        'Seth Casteel',
+      )}\n   published by ${publisherColor('Little, Brown')}\n`,
+      `${middot} ${titleColor('Dogs')}\n   by ${authorsColor('Catherine Johns')}\n`,
+      `${middot} ${titleColor('Dogs')}\n   published by ${publisherColor(
+        "Barron's Educational Series",
+      )}\n`,
+      `${middot} ${titleColor('Underwater Dogs')}   \n`,
     ];
 
     it('where has title, authors and publisher', () => {
@@ -81,10 +86,12 @@ describe('formatBookOutput correctly formats output for reading list and book ch
 
   describe('correctly formats output for book choices', () => {
     const desiredOutput = [
-      ` Underwater Dogs\n      by Seth Casteel, published by Little, Brown`,
-      ` Dogs\n      by Catherine Johns`,
-      ` Dogs\n      published by Barron's Educational Series`,
-      ` Underwater Dogs      `,
+      ` ${titleColor('Underwater Dogs')}\n      by ${authorsColor(
+        'Seth Casteel',
+      )}, published by ${publisherColor('Little, Brown')}`,
+      ` ${titleColor('Dogs')}\n      by ${authorsColor('Catherine Johns')}`,
+      ` ${titleColor('Dogs')}\n      published by ${publisherColor("Barron's Educational Series")}`,
+      ` ${titleColor('Underwater Dogs')}      `,
     ];
 
     it('where has title, authors and publisher', () => {
