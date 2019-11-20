@@ -16,17 +16,22 @@ const getBooks = async searchQuery => {
         fields,
       },
     });
+
     const response = _response.data.items;
     if (response) {
       const books = response.map(book => {
         const { volumeInfo } = book;
-        if (volumeInfo.publisher) {
-          volumeInfo.publisher = removeBoundaryQuotes(volumeInfo.publisher);
-        }
+
+        // remove extra quotes from publisher
+        volumeInfo.publisher = volumeInfo.publisher
+          ? removeBoundaryQuotes(volumeInfo.publisher)
+          : volumeInfo.publisher;
+
         return volumeInfo;
       });
       return books;
     }
+
     console.log('\nNo results for your search.  Please try again.\n');
     return [];
   } catch (error) {
@@ -35,8 +40,7 @@ const getBooks = async searchQuery => {
 };
 
 //
-const formatBookChoices = results => {
-  // console.log('results: ', results);
+const bookChoices = results => {
   const formatted = results.map(book => {
     const { title } = book;
     const name = formatBookOutput(book);
@@ -51,5 +55,5 @@ const formatBookChoices = results => {
 
 module.exports = {
   getBooks,
-  formatBookChoices,
+  bookChoices,
 };
