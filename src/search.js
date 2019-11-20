@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
+// const chalk = require('chalk');
 const { getBooks, bookChoices } = require('./books');
 const { addToReadingList } = require('./reading-list');
+const { warningColor, infoColor } = require('./colors');
 
 const search = async query => {
   if (query) {
@@ -11,7 +13,9 @@ const search = async query => {
       const addToListAnswer = await inquirer.prompt({
         type: 'checkbox',
         name: 'addToList',
-        message: `Search results for: "${query}". Select all you want to add to your Reading List`,
+        message: `Search results for: ${infoColor(
+          infoColor(`"${query}"`),
+        )}. Select all you want to add to your Reading List`,
         async choices() {
           return bookChoices(bookResults);
         },
@@ -20,11 +24,11 @@ const search = async query => {
       if (addToListAnswer.addToList.length) {
         addToReadingList(bookResults, addToListAnswer.addToList);
       } else {
-        console.log('\nNo books added to your list.\n');
+        console.log(infoColor('\nNo books added to your list.\n'));
       }
     }
   } else {
-    console.log('No search query entered.  Please try again.');
+    console.log(warningColor('\nNo search query entered.  Please try again.\n'));
   }
 };
 

@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { removeBoundaryQuotes, formatBookOutput } = require('./utils');
+const { warningColor } = require('./colors');
 
 const getBooks = async searchQuery => {
   try {
@@ -32,10 +33,10 @@ const getBooks = async searchQuery => {
       return books;
     }
 
-    console.log('\nNo results for your search.  Please try again.\n');
+    console.log(warningColor('\nNo results for your search.  Please try again.\n'));
     return [];
   } catch (error) {
-    console.error(error);
+    console.error(warningColor(error));
   }
 };
 

@@ -1,5 +1,6 @@
 const { existsSync, readFileSync, writeFileSync } = require('fs');
 const { formatBookOutput } = require('./utils');
+const { infoColor } = require('./colors');
 
 const fileUrl = `${process.cwd()}/data/list.json`;
 
@@ -25,7 +26,7 @@ const addToReadingList = (bookResults, itemsToAddTitle) => {
   if (oldList.length) {
     itemsToAddNotInList = itemsToAdd.filter(x => notInList(oldList, x));
     if (!itemsToAddNotInList.length)
-      console.log('\nThese book(s) are already on your Reading List.\n');
+      console.log(infoColor('\nThese book(s) are already on your Reading List.\n'));
   } else {
     itemsToAddNotInList = itemsToAdd;
   }
@@ -46,7 +47,7 @@ const getReadingList = () => {
       console.log(formatBookOutput(book, 'reading-list'));
     });
   } else {
-    console.log('\nThere are no books in your reading list.\n');
+    console.log(infoColor('\nThere are no books in your reading list.\n'));
   }
 };
 

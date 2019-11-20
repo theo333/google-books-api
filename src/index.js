@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
-
 const { clearConsole } = require('./utils');
 const { getReadingList } = require('./reading-list');
 const search = require('./search');
+const { helloByeColor, infoColor } = require('./colors');
 
 const mainQuestion = [
   {
@@ -27,7 +27,7 @@ const mainQuestion = [
 
 const bookCli = async () => {
   clearConsole();
-  console.log('Welcome to BookFinderCLI!\n');
+  console.log(`Welcome to ${helloByeColor('BookFinderCLI')}!\n`);
   try {
     let exitApp = false;
     while (!exitApp) {
@@ -44,7 +44,11 @@ const bookCli = async () => {
           getReadingList();
           break;
         case 'exit':
-          console.log('\nThanks for using BookFinderCLI!\nHave a great day!\n');
+          console.log(
+            `\nThanks for using ${helloByeColor(
+              'BookFinderCLI',
+            )}!\n\nHave a great day!\n\n${infoColor('********************************')}\n`,
+          );
           exitApp = true;
           break;
         default:

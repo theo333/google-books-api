@@ -1,4 +1,5 @@
 const readline = require('readline');
+const { titleColor, authorsColor, publisherColor } = require('./colors');
 
 const clearConsole = () => {
   const blankScreen = '\n'.repeat(process.stdout.rows);
@@ -15,13 +16,13 @@ const formatBookOutput = (book, outputType = '') => {
   const { title, authors, publisher } = book;
   const isReadingList = outputType === 'reading-list';
   let output = isReadingList ? `${String.fromCharCode(186)} ` : ' ';
-  output += title;
+  output += titleColor(title);
   output += !authors && !publisher ? '' : '\n';
   output += isReadingList ? spaces(3) : spaces(6);
-  output += authors ? `by ${authors.join(', ')}` : '';
+  output += authors ? `by ${authorsColor(authors.join(', '))}` : '';
   /*eslint-disable-next-line no-nested-ternary*/
   output += authors && publisher ? (isReadingList ? `\n${spaces(3)}` : ', ') : '';
-  output += publisher ? `published by ${publisher}` : '';
+  output += publisher ? `published by ${publisherColor(publisher)}` : '';
   output += isReadingList ? '\n' : '';
   return output;
 };
