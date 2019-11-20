@@ -47,7 +47,7 @@ const getReadingList = () => {
       console.log(formatBookOutput(book, 'reading-list'));
     });
   } else {
-    console.log('There are no books in your reading list.');
+    console.log('\nThere are no books in your reading list.\n');
   }
 };
 
