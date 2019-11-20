@@ -14,26 +14,26 @@ This application enables the user to:
 ### Install and Run
 
 #### Install 
-```sh
+```
 npm i
 ```
 
 Create ability to run program (Shell Command) by typing `bookfinder` in command line from any directory.
 
-```sh
+```
 npm link
 ```
 
 #### Uninstall
 
 Remove ability to run program by typing `bookfinder` in command line from any directory.
-```sh
+```
 npm unlink
 ```
 
 #### Run Program
 
-```sh
+```
 bookfinder
 ```
 Or
