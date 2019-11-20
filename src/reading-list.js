@@ -25,7 +25,8 @@ const addToReadingList = (bookResults, itemsToAddTitle) => {
   let itemsToAddNotInList = [];
   if (oldList.length) {
     itemsToAddNotInList = itemsToAdd.filter(x => notInList(oldList, x));
-    if (!itemsToAddNotInList.length) console.log('\nNo books added to your list.\n');
+    if (!itemsToAddNotInList.length)
+      console.log('\nThese book(s) are already on your Reading List.\n');
   } else {
     itemsToAddNotInList = itemsToAdd;
   }
@@ -44,7 +45,7 @@ const getReadingList = () => {
   const readingListJson = getReadingListJson(fileUrl);
   if (readingListJson.length) {
     readingListJson.forEach(book => {
-      console.log(formatBookOutput(book));
+      console.log(formatBookOutput(book, 'reading-list'));
     });
   } else {
     console.log('There are no books in your reading list.');
