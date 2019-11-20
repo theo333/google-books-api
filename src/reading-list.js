@@ -33,7 +33,7 @@ const addToReadingList = (bookResults, itemsToAddTitle) => {
 
   const newList = oldList.concat(itemsToAddNotInList);
 
-  // TODO display updated reading list
+  // TODO? display updated reading list
 
   // save to json file
   const data = JSON.stringify(newList, null, 2);
@@ -41,7 +41,6 @@ const addToReadingList = (bookResults, itemsToAddTitle) => {
 };
 
 const getReadingList = () => {
-  // grab json
   const readingListJson = getReadingListJson(fileUrl);
   if (readingListJson.length) {
     readingListJson.forEach(book => {
