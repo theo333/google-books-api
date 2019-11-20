@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 
 const { clearConsole } = require('./utils');
-const { getBooks, formatBookResults } = require('./books');
+const { getBooks, formatBookChoices } = require('./books');
 const { addToReadingList, getReadingList } = require('./reading-list');
 
 const mainQuestion = [
@@ -39,20 +39,22 @@ const bookCli = async () => {
 
           // addToList prompt / answer
           // TODO: format output (books added to list) into a vertical list
-          const addToListAnswer = await inquirer.prompt({
-            type: 'checkbox',
-            name: 'addToList',
-            message:
-              'Here are the results of your query. Select all you want to add to your Reading List',
-            async choices() {
-              return formatBookResults(bookResults);
-            },
-          });
+          if (bookResults.length) {
+            const addToListAnswer = await inquirer.prompt({
+              type: 'checkbox',
+              name: 'addToList',
+              message: `Search results for: ${mainAnswer.searchQuery}. Select all you want to add to your Reading List`,
+              async choices() {
+                return formatBookChoices(bookResults);
+              },
+            });
 
-          if (addToListAnswer.addToList.length) {
-            addToReadingList(bookResults, addToListAnswer.addToList);
-          } else {
-            console.log('\nNo books added to your list.\n');
+            if (addToListAnswer.addToList.length) {
+              // console.log('addToListAnswer.addToList: ', addToListAnswer.addToList)
+              addToReadingList(bookResults, addToListAnswer.addToList);
+            } else {
+              console.log('\nNo books added to your list.\n');
+            }
           }
         } else {
           console.log('No search query entered.  Please try again.');
@@ -62,7 +64,6 @@ const bookCli = async () => {
       if (mainAnswer.action === 'list') {
         console.log('\n');
         getReadingList();
-        console.log('\n');
       }
 
       if (mainAnswer.action === 'exit') {

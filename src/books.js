@@ -8,7 +8,7 @@ const getBooks = async searchQuery => {
     // TODO in production app would move to .env file and grab using process.env
     // const key = '';
 
-    const response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
+    const _response = await axios.get('https://www.googleapis.com/books/v1/volumes', {
       params: {
         q: searchQuery,
         startIndex: 0,
@@ -16,20 +16,27 @@ const getBooks = async searchQuery => {
         fields,
       },
     });
-    const books = response.data.items.map(x => {
-      if (x.volumeInfo.publisher) {
-        x.volumeInfo.publisher = removeBoundaryQuotes(x.volumeInfo.publisher);
-      }
-      return x.volumeInfo;
-    });
-    return books;
+    const response = _response.data.items;
+    if (response) {
+      const books = response.map(book => {
+        const { volumeInfo } = book;
+        if (volumeInfo.publisher) {
+          volumeInfo.publisher = removeBoundaryQuotes(volumeInfo.publisher);
+        }
+        return volumeInfo;
+      });
+      return books;
+    }
+    console.log('\nNo results for your search.  Please try again.\n');
+    return [];
   } catch (error) {
     console.error(error);
   }
 };
 
-const formatBookResults = results => {
-  console.log('results: ', results);
+//
+const formatBookChoices = results => {
+  // console.log('results: ', results);
   const formatted = results.map(book => {
     const { title } = book;
     const name = formatBookOutput(book);
@@ -44,5 +51,5 @@ const formatBookResults = results => {
 
 module.exports = {
   getBooks,
-  formatBookResults,
+  formatBookChoices,
 };
