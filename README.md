@@ -1,11 +1,13 @@
 ## BookFinderCLI
 
-### Description 
+### Description
+
 BookFinderCLI is a CLI search tool which enables you to query the Google Books API and save the books retrieved to your own local reading list.
 
 ### Functionality
 
 This application enables the user to:
+
 - Type in a query and display a list of 5 books matching that query.
 - Each item in the list includes the book's author, title, and publishing company.
 - Select a book or books from the five search results displayed and save to a “Reading List”
@@ -13,7 +15,8 @@ This application enables the user to:
 
 ### Install and Run
 
-#### Install 
+#### Install
+
 ```
 npm i
 ```
@@ -27,6 +30,7 @@ npm link
 #### Uninstall
 
 Remove ability to run program by typing `bookfinder` in command line from any directory.
+
 ```
 npm unlink
 ```
@@ -36,6 +40,7 @@ npm unlink
 ```
 bookfinder
 ```
+
 Or
 
 ```
@@ -44,25 +49,22 @@ npm run start
 
 ### Technologies Used
 
-- [Inquirer](https://www.npmjs.com/package/inquirer)
-- [Axios](https://www.npmjs.com/package/axios)
-- Chalk (next iteration)
-- JSON
+- [Inquirer](https://www.npmjs.com/package/inquirer) - handle question / answer
+- [Axios](https://www.npmjs.com/package/axios) - get data from api
+- [Chalk](https://www.npmjs.com/package/chalk) - add color
+- [Eslint](https://eslint.org/) - linting
+- [Prettier](https://prettier.io/) - code formatting
 
 ### Developer Notes
-- JSON file for storage - Since the amount of data to save was not that much and that another developer would be testing my code, I chose to save data to JSON file. There was no need to go through the extra steps of creating a db.
 
+- **JSON file for storage** - Since the amount of data to save was not that much and that another developer would be testing my code, I chose to save data to JSON file. There was no need to go through the extra steps of creating a db.
 
-### TODO (next iteration)
-  - Styling
-    - Color some answers to be consistent with the Inquirer answers output
-    - Notices should be different color from output (reading list, etc)
-    - Add white space to some areas so things do not seem so cramped and for ease of reading
-    - Format answers from Inquirer into lists
-  - Refactor (?) - replace Inquirer with custom code to gain more control over formatting output
-  - Improve README
-    - Add image
-    - Improve styling
+### Tasks Completed Since First Iteration
 
-
-
+- Removed `/data` folder from `.gitignore` so that can now save to `list.json`.
+- Styling and formatting
+  - Add color to output
+  - Add white space
+- Added error handling for when no books results are returned
+- Refactored `bookCli` and many other parts of the code
+- Wrote tests for `removeBoundaryQuotes` and `formatBookOutput`

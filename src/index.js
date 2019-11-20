@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const { clearConsole } = require('./utils');
 const { getReadingList } = require('./reading-list');
 const search = require('./search');
-const { helloByeColor, infoColor } = require('./colors');
+const { helloByeColor, infoColor, errorColor } = require('./colors');
 
 const mainQuestion = [
   {
@@ -56,7 +56,7 @@ const bookCli = async () => {
       }
     }
   } catch (error) {
-    throw new Error(error);
+    throw new Error(errorColor(error));
   }
 };
 
