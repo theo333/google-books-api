@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 
 const { clearConsole } = require('./utils');
-const { getBooks, formatBookChoices } = require('./books');
+const { getBooks, bookChoices } = require('./books');
 const { addToReadingList, getReadingList } = require('./reading-list');
 
 const mainQuestion = [
@@ -45,12 +45,11 @@ const bookCli = async () => {
               name: 'addToList',
               message: `Search results for: ${mainAnswer.searchQuery}. Select all you want to add to your Reading List`,
               async choices() {
-                return formatBookChoices(bookResults);
+                return bookChoices(bookResults);
               },
             });
 
             if (addToListAnswer.addToList.length) {
-              // console.log('addToListAnswer.addToList: ', addToListAnswer.addToList)
               addToReadingList(bookResults, addToListAnswer.addToList);
             } else {
               console.log('\nNo books added to your list.\n');
