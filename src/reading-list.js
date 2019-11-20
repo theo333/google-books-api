@@ -12,7 +12,6 @@ const getReadingListJson = file => {
 };
 
 const addToReadingList = (bookResults, itemsToAddTitle) => {
-  // grab json file
   const oldList = getReadingListJson(fileUrl);
 
   // filter bookResults to only include addToList items

@@ -19,6 +19,7 @@ const formatBookOutput = (book, outputType = '') => {
   output += !authors && !publisher ? '' : '\n';
   output += isReadingList ? spaces(3) : spaces(6);
   output += authors ? `by ${authors.join(', ')}` : '';
+  /*eslint-disable-next-line no-nested-ternary*/
   output += authors && publisher ? (isReadingList ? `\n${spaces(3)}` : ', ') : '';
   output += publisher ? `published by ${publisher}` : '';
   output += isReadingList ? '\n' : '';
