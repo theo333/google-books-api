@@ -18,9 +18,9 @@ const formatBookOutput = (book, outputType = '') => {
   output += title;
   output += !authors && !publisher ? '' : '\n';
   output += isReadingList ? spaces(3) : spaces(6);
-  output += authors ? ` by ${authors.join(', ')}` : '';
-  output += authors && publisher ? (isReadingList ? `\n${spaces(3)}` : ',') : '';
-  output += publisher ? ` published by ${publisher}` : '';
+  output += authors ? `by ${authors.join(', ')}` : '';
+  output += authors && publisher ? (isReadingList ? `\n${spaces(3)}` : ', ') : '';
+  output += publisher ? `published by ${publisher}` : '';
   output += isReadingList ? '\n' : '';
   return output;
 };

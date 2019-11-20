@@ -43,19 +43,64 @@ describe('formatBookOutput correctly formats output for reading list and book ch
     {
       title: 'Dogs',
       authors: ['Catherine Johns'],
-      publisher: 'Harvard University Press',
     },
     {
       title: 'Dogs',
-      authors: ['Kate Petty'],
       publisher: "Barron's Educational Series",
+    },
+    {
+      title: 'Underwater Dogs',
     },
   ];
 
-  // describe('correctly formats output for reading list', () => {
-  //   const desiredOutput = [
+  describe('correctly formats output for reading list', () => {
+    const middot = String.fromCharCode(186);
+    const desiredOutput = [
+      `${middot} Underwater Dogs\n   by Seth Casteel\n   published by Little, Brown\n`,
+      `${middot} Dogs\n   by Catherine Johns\n`,
+      `${middot} Dogs\n   published by Barron's Educational Series\n`,
+      `${middot} Underwater Dogs   \n`,
+    ];
 
-  //   ];
-  //   it('')
-  // });
+    it('where has title, authors and publisher', () => {
+      expect(formatBookOutput(dogSearchResults[0], 'reading-list')).toEqual(desiredOutput[0]);
+    });
+
+    it('where has title and authors', () => {
+      expect(formatBookOutput(dogSearchResults[1], 'reading-list')).toEqual(desiredOutput[1]);
+    });
+
+    it('where has title and publisher', () => {
+      expect(formatBookOutput(dogSearchResults[2], 'reading-list')).toEqual(desiredOutput[2]);
+    });
+
+    it('where has title only', () => {
+      expect(formatBookOutput(dogSearchResults[3], 'reading-list')).toEqual(desiredOutput[3]);
+    });
+  });
+
+  describe('correctly formats output for book choices', () => {
+    const desiredOutput = [
+      ` Underwater Dogs\n      by Seth Casteel, published by Little, Brown`,
+      ` Dogs\n      by Catherine Johns`,
+      ` Dogs\n      published by Barron's Educational Series`,
+      ` Underwater Dogs      `,
+    ];
+
+    it('where has title, authors and publisher', () => {
+      expect(formatBookOutput(dogSearchResults[0])).toEqual(desiredOutput[0]);
+    });
+
+    it('where has title and authors', () => {
+      expect(formatBookOutput(dogSearchResults[1])).toEqual(desiredOutput[1]);
+    });
+
+    it('where has title and publisher', () => {
+      expect(formatBookOutput(dogSearchResults[2])).toEqual(desiredOutput[2]);
+    });
+
+    it('where has title only', () => {
+      expect(formatBookOutput(dogSearchResults[3])).toEqual(desiredOutput[3]);
+    });
+  });
 });
