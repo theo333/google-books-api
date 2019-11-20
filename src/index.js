@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 
 const { clearConsole } = require('./utils');
-const { getBooks, bookChoices } = require('./books');
-const { addToReadingList, getReadingList } = require('./reading-list');
+const { getReadingList } = require('./reading-list');
+const search = require('./search');
 
 const mainQuestion = [
   {
@@ -33,41 +33,22 @@ const bookCli = async () => {
     while (!exitApp) {
       const mainAnswer = await inquirer.prompt(mainQuestion);
 
-      if (mainAnswer.action === 'search') {
-        if (mainAnswer.searchQuery) {
-          const bookResults = await getBooks(mainAnswer.searchQuery);
+      const { action, searchQuery } = mainAnswer;
 
-          // addToList prompt / answer
-          // TODO: format output (books added to list) into a vertical list
-          if (bookResults.length) {
-            const addToListAnswer = await inquirer.prompt({
-              type: 'checkbox',
-              name: 'addToList',
-              message: `Search results for: ${mainAnswer.searchQuery}. Select all you want to add to your Reading List`,
-              async choices() {
-                return bookChoices(bookResults);
-              },
-            });
-
-            if (addToListAnswer.addToList.length) {
-              addToReadingList(bookResults, addToListAnswer.addToList);
-            } else {
-              console.log('\nNo books added to your list.\n');
-            }
-          }
-        } else {
-          console.log('No search query entered.  Please try again.');
-        }
-      }
-
-      if (mainAnswer.action === 'list') {
-        console.log('\n');
-        getReadingList();
-      }
-
-      if (mainAnswer.action === 'exit') {
-        console.log('\nThanks for using BookFinderCLI!\nHave a great day!\n');
-        exitApp = true;
+      switch (action) {
+        case 'search':
+          await search(searchQuery);
+          break;
+        case 'list':
+          console.log('\n');
+          getReadingList();
+          break;
+        case 'exit':
+          console.log('\nThanks for using BookFinderCLI!\nHave a great day!\n');
+          exitApp = true;
+          break;
+        default:
+          console.log('Must select from one of the choices given.');
       }
     }
   } catch (error) {
@@ -75,6 +56,4 @@ const bookCli = async () => {
   }
 };
 
-module.exports = {
-  bookCli,
-};
+module.exports = bookCli;
