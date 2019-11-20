@@ -3,5 +3,7 @@
 lint:
 	./node_modules/.bin/prettier --loglevel error 'bin/*.js' --write
 	./node_modules/.bin/prettier --loglevel error 'src/*.js' --write
+	./node_modules/.bin/prettier --loglevel error 'test/*.js' --write
 	./node_modules/.bin/eslint ./bin --fix
 	./node_modules/.bin/eslint ./src --fix
+	./node_modules/.bin/eslint ./test --fix
