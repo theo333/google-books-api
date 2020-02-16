@@ -1,5 +1,7 @@
 ## BookFinderCLI
 
+![intial screen for BookFinderCLI](readme-img/bookfinder-main.png)
+
 ### Description
 
 BookFinderCLI is a CLI search tool which enables you to query the Google Books API and save the books retrieved to your own local reading list.
@@ -12,6 +14,15 @@ This application enables the user to:
 - Each item in the list includes the book's author, title, and publishing company.
 - Select a book or books from the five search results displayed and save to a “Reading List”
 - View a “Reading List” with all the books the user has selected from their queries -- this is a local reading list and not tied to Google Books’s account features.
+
+Search for books, select and add to Reading List
+![Search for books and add to Reading List](readme-img/bookfinder-search-for-book.gif)
+
+Will notify if book(s) aleady in Reading List
+![Will notify if book(s) aleady in Reading List](readme-img/bookfinder-search-for-book.gif)
+
+View Reading List
+![View Reading List](readme-img/bookfinder-view-reading-list.gif)
 
 ### Install and Run
 

@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Old Possum's Book of Practical Cats",
+    "authors": [
+      "T. S. Eliot"
+    ],
+    "publisher": "Houghton Mifflin Harcourt"
+  },
+  {
+    "title": "Dancing with Cats",
+    "authors": [
+      "Burton Silver",
+      "Heather Busch"
+    ],
+    "publisher": "Chronicle Books"
+  },
+  {
+    "title": "Adventure Cats",
+    "authors": [
+      "Laura J. Moss"
+    ],
+    "publisher": "Workman Publishing"
+  },
+  {
+    "title": "Go, Dog, Go!",
+    "authors": [
+      "Philip D. Eastman"
+    ],
+    "publisher": "Random House Books for Young Readers"
+  },
+  {
+    "title": "Inside of a Dog",
+    "authors": [
+      "Alexandra Horowitz"
+    ]
+  }
+]
