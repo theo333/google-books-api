@@ -16,12 +16,15 @@ This application enables the user to:
 - View a “Reading List” with all the books the user has selected from their queries -- this is a local reading list and not tied to Google Books’s account features.
 
 Search for books, select and add to Reading List
+
 ![Search for books and add to Reading List](readme-img/bookfinder-search-for-book.gif)
 
 Will notify if book(s) aleady in Reading List
-![Will notify if book(s) aleady in Reading List](readme-img/bookfinder-search-for-book.gif)
+
+![Will notify if book(s) aleady in Reading List](readme-img/bookfinder-already-on-reading-list.gif)
 
 View Reading List
+
 ![View Reading List](readme-img/bookfinder-view-reading-list.gif)
 
 ### Install and Run
